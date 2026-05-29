@@ -9,4 +9,4 @@ New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explore
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoDriveTypeAutoRun" -Value 255 -Type DWord -Force
 
 Write-Host "[OK] AutoPlay Security Enabled" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

@@ -21,7 +21,6 @@ echo.
 set /p confirm="Type CONFIRM to proceed (anything else cancels): "
 if /i not "!confirm!"=="CONFIRM" (
     echo [CANCELLED] No changes made.
-    pause
     exit /b 0
 )
 
@@ -64,6 +63,5 @@ echo.
 echo [OK] Office Security Disabled - Macros and ActiveX enabled
 echo [WARN] System is now vulnerable to macro-based malware!
 echo [OK] Log written to: %LOG_FILE%
-pause
 endlocal
 exit /b 0

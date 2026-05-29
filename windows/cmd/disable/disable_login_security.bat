@@ -31,6 +31,5 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v dontdisplaylastusername /
 echo.
 echo [OK] Login Security Disabled (CAD requirement removed)
 echo [OK] Log written to: %LOG_FILE%
-pause
 endlocal
 exit /b 0

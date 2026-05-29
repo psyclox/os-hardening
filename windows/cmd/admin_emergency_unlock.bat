@@ -83,6 +83,5 @@ if /i "!INPUT_HASH!"=="!ADMIN_HASH!" (
     echo.
 )
 
-pause
 endlocal
 exit /b 0

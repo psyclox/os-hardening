@@ -7,4 +7,4 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreenCamera" -Value 0 -Type DWord -Force
 
 Write-Host "[OK] Lock Screen Security Disabled" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

@@ -21,5 +21,4 @@ call "%~dp0enable\enable_autoplay_security.bat"
 echo ==============================================
 echo    All Others Security Measures Applied
 echo ==============================================
-pause
 exit /b 0

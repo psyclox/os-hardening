@@ -23,5 +23,4 @@ call "%~dp0disable\disable_autoplay_security.bat"
 echo ==============================================
 echo    All Others Security Measures Removed
 echo ==============================================
-pause
 exit /b 0

@@ -28,4 +28,4 @@ Write-Host "[OK] LSA RunAsPPL enabled - Mimikatz-style attacks blocked" -Foregro
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
 Write-Host ""
 Write-Host "[WARN] Reboot required for LSA Protected Process Light to take effect." -ForegroundColor Yellow
-Read-Host "Press Enter to continue"
+

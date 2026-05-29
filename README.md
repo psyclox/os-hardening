@@ -2,7 +2,7 @@
 
 A comprehensive, cross-platform toolkit of security hardening scripts for **Windows**, **Linux**, and **macOS**. Each platform includes modular scripts to enable or disable specific security policies, with master scripts for bulk operations.
 
-> **Windows scripts are at Version 2.0** — Major security overhaul addressing Defender UI bypass, Firewall lockdown, username hiding, admin bypass, and more. See [`windows/README.md`](windows/README.md#whats-new-in-v2).
+> **Windows scripts are at Version 2.1** — Added four new user-friendly entry-point scripts, auto-exit on all bat/ps1 files, and more. See [`windows/README.md`](windows/README.md#whats-new-in-v2).
 
 ## Supported Platforms
 
@@ -23,18 +23,22 @@ os-hardening/
 │   │   ├── others/                    # Supplementary scripts + USB monitor
 │   │   ├── apply_all_security.bat
 │   │   ├── remove_all_security.bat
-│   │   ├── check_security_status.bat  # ★ NEW
-│   │   ├── admin_emergency_unlock.bat # ★ NEW
-│   │   └── admin_relock.bat           # ★ NEW
+│   │   ├── turn on security.bat       # ★ v2.1: Friendly alias — enables all core security
+│   │   ├── turn off security.bat      # ★ v2.1: Friendly alias — disables all core security
+│   │   ├── ironclad security.bat      # ★ v2.1: Maximum lockdown (core + others + USB monitor)
+│   │   ├── disable security.bat       # ★ v2.1: Wipe ALL security layers (requires DISABLE)
+│   │   ├── check_security_status.bat
+│   │   ├── admin_emergency_unlock.bat
+│   │   └── admin_relock.bat
 │   └── powershell/                    # PowerShell (.ps1) equivalents
 │       ├── enable/
 │       ├── disable/
 │       ├── others/
 │       ├── apply_all_security.ps1
 │       ├── remove_all_security.ps1
-│       ├── check_security_status.ps1  # ★ NEW
-│       ├── admin_emergency_unlock.ps1 # ★ NEW
-│       └── admin_relock.ps1           # ★ NEW
+│       ├── check_security_status.ps1
+│       ├── admin_emergency_unlock.ps1
+│       └── admin_relock.ps1
 ├── linux/                             # Linux hardening
 │   ├── enable/
 │   ├── disable/
@@ -49,11 +53,22 @@ os-hardening/
 
 ## Windows Hardening (`windows/`)
 
-Available in both **CMD** and **PowerShell** formats with identical functionality.
+Available in both **CMD** and **PowerShell** formats with identical functionality. All scripts **auto-exit** after completion — no manual key press required.
+
+### Quick-Start Scripts (New in v2.1)
+
+Four simple entry-point scripts that cover the most common operations:
+
+| Script | What It Does |
+|--------|-------------|
+| `turn on security.bat` | Enables all 5 core security modules — the everyday "lock it down" command |
+| `turn off security.bat` | Disables all 5 core modules (requires typing `CONFIRM`) |
+| `ironclad security.bat` | **Maximum lockdown** — enables core + privacy/update/lockscreen/autoplay + USB monitor in one shot |
+| `disable security.bat` | Removes **every** security layer including others + USB monitor (requires typing `DISABLE`) |
 
 ### Core Hardening Areas (v2.0)
 
-* **Login Security:** Enforces Ctrl+Alt+Delete (CAD) and **hides the last logged-in username** on the lock screen (employees type their password only — username is not shown to prevent information leakage).
+* **Login Security:** Enforces Ctrl+Alt+Delete (CAD) at login. Username is **intentionally kept visible** on the lock screen so employees can see their own login name.
 * **Network & Firewall Security:** Blocks dangerous ports (445, 3389), disables SMBv1, LLMNR, NetBIOS. Firewall is **locked via Group Policy** — the toggle is greyed out in Windows Security UI so employees cannot turn it off.
 * **Credential Protection:** Disables WDigest (no plaintext passwords in memory), enables SEHOP, and enables **LSA RunAsPPL** to block Mimikatz-style credential dumping tools.
 * **Malware Protection:** Enforces Windows Defender with **Tamper Protection** (prevents employee UI tampering), **10 ASR rules** (email, USB, Office, JS/VBScript attack surface reduction), cloud protection, and PowerShell script block logging.
@@ -66,6 +81,14 @@ Available in both **CMD** and **PowerShell** formats with identical functionalit
 * **`admin_relock`** — One-click re-hardening after admin work is complete
 * **Audit logging** — Every script logs to `C:\ProgramData\OrgSecurity\security_log.txt`
 * **USB monitor as Scheduled Task** — Now runs under SYSTEM, persists on reboot, unkillable by employees
+
+### New in v2.1
+
+* **`turn on security.bat`** — Friendly one-click alias for `apply_all_security`
+* **`turn off security.bat`** — Friendly one-click alias for `remove_all_security` (with CONFIRM gate)
+* **`ironclad security.bat`** — Maximum 3-phase lockdown: core + supplementary + USB monitor
+* **`disable security.bat`** — Complete 3-phase security wipe (requires typing `DISABLE`)
+* **Auto-exit** — All `.bat` and `.ps1` scripts now exit automatically after completion (no `pause`/`Read-Host` prompts)
 
 ### Supplementary Hardening (`others/`)
 
@@ -107,19 +130,27 @@ Available in both **CMD** and **PowerShell** formats with identical functionalit
 
 ## How to Use
 
-### Windows
+### Windows — Quick Start
 
 ```batch
-:: CMD - Run as Administrator
+:: Most common — turn on all security (CMD, run as Administrator)
 cd windows\cmd
-apply_all_security.bat
+"turn on security.bat"
 
-:: Then verify:
+:: Maximum lockdown (core + extras + USB monitor)
+"ironclad security.bat"
+
+:: Verify everything applied correctly
 check_security_status.bat
 ```
 
+```batch
+:: Existing master scripts also work (identical logic)
+apply_all_security.bat
+```
+
 ```powershell
-# PowerShell - Run as Administrator
+# PowerShell — Run as Administrator
 cd windows\powershell
 .\apply_all_security.ps1
 

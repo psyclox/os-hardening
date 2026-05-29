@@ -29,4 +29,4 @@ Write-Host "   Reboot REQUIRED for all changes to take effect" -ForegroundColor 
 Write-Host "==============================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "Run check_security_status.ps1 to verify all settings." -ForegroundColor Cyan
-Read-Host "Press Enter to continue"
+

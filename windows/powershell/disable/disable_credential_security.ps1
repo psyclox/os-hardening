@@ -29,4 +29,4 @@ Write-Host "[OK] Credential Security Disabled" -ForegroundColor Green
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
 Write-Host ""
 Write-Host "[WARN] Reboot required for RunAsPPL change to take effect." -ForegroundColor Yellow
-Read-Host "Press Enter to continue"
+

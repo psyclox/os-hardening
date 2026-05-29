@@ -10,4 +10,4 @@ New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Forc
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreenCamera" -Value 1 -Type DWord -Force
 
 Write-Host "[OK] Lock Screen Security Enabled" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

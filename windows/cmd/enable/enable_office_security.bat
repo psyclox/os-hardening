@@ -53,6 +53,5 @@ echo [OK] Office Security Enabled (Macros and ActiveX disabled)
 echo [OK] HKLM Group Policy locks prevent employee overrides
 echo [OK] Covers Office 2013 (15.0) and 2016/2019/365 (16.0)
 echo [OK] Log written to: %LOG_FILE%
-pause
 endlocal
 exit /b 0

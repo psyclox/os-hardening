@@ -37,6 +37,5 @@ echo [OK] Credential Security Disabled
 echo [OK] Log written to: %LOG_FILE%
 echo.
 echo [WARN] Reboot required for RunAsPPL change to take effect.
-pause
 endlocal
 exit /b 0

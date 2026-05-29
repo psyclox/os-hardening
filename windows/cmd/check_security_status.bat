@@ -116,6 +116,5 @@ echo.
 echo Run enable_malware_protection.bat / apply_all_security.bat
 echo to fix any [!!] items.
 echo.
-pause
 endlocal
 exit /b 0

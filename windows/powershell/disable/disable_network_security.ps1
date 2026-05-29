@@ -43,4 +43,4 @@ Write-Host ""
 Write-Host "[OK] Network Security Disabled (Default Settings Restored)" -ForegroundColor Green
 Write-Host "[OK] Firewall GP locks removed - UI controls restored" -ForegroundColor Green
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

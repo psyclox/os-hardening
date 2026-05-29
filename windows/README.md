@@ -1,8 +1,8 @@
 # Windows Security Hardening Scripts
 
-This folder contains scripts to harden your Windows operating system's security for **organisation/office environments** where employees should not be able to modify security settings. Available in both **CMD (Batch)** and **PowerShell** formats.
+This folder contains scripts to harden your Windows operating system's security for **organisation/office environments** where employees should not be able to modify security settings. Available in both **CMD (Batch)** and **PowerShell** formats. All scripts **auto-exit** after completion — no manual key press required.
 
-> **Version 2.0** — Major security overhaul. See [What's New in v2](#whats-new-in-v2) below.
+> **Version 2.1** — Added four new user-friendly entry-point scripts (`turn on security`, `turn off security`, `ironclad security`, `disable security`) and auto-exit on all scripts. See [What's New in v2.1](#whats-new-in-v21) below.
 
 > 🆘 **Locked out or can't run scripts?** → See **[MANUAL_RECOVERY.md](MANUAL_RECOVERY.md)** — complete guide with pure copy-paste commands, lock screen bypass, Safe Mode steps, and a USB emergency recovery script.
 
@@ -23,20 +23,24 @@ windows/
 │   │   └── remove_others_security.bat
 │   ├── apply_all_security.bat            # Master enable script
 │   ├── remove_all_security.bat           # Master disable script
-│   ├── check_security_status.bat         # ★ NEW: Verify all settings
-│   ├── admin_emergency_unlock.bat        # ★ NEW: Admin bypass (password protected)
-│   ├── admin_relock.bat                  # ★ NEW: Instant re-hardening
-│   └── emergency_nuke.bat               # ★ NEW: USB recovery — removes all hardening without any script deps
+│   ├── turn on security.bat              # ★ v2.1: Friendly alias — enables all core security
+│   ├── turn off security.bat             # ★ v2.1: Friendly alias — disables all core security
+│   ├── ironclad security.bat             # ★ v2.1: Maximum lockdown (core + others + USB monitor)
+│   ├── disable security.bat              # ★ v2.1: Wipe ALL security layers (requires DISABLE)
+│   ├── check_security_status.bat         # Verify all settings
+│   ├── admin_emergency_unlock.bat        # Admin bypass (password protected)
+│   ├── admin_relock.bat                  # Instant re-hardening after admin work
+│   └── emergency_nuke.bat               # USB recovery — removes all hardening without any script deps
 └── powershell/                           # PowerShell (.ps1) scripts
     ├── enable/
     ├── disable/
     ├── others/
     ├── apply_all_security.ps1
     ├── remove_all_security.ps1
-    ├── check_security_status.ps1         # ★ NEW: Verify all settings
-    ├── admin_emergency_unlock.ps1        # ★ NEW: Admin bypass (password protected)
-    └── admin_relock.ps1                  # ★ NEW: Instant re-hardening
-MANUAL_RECOVERY.md                       # ★ NEW: Complete manual undo guide (no scripts needed)
+    ├── check_security_status.ps1         # Verify all settings
+    ├── admin_emergency_unlock.ps1        # Admin bypass (password protected)
+    └── admin_relock.ps1                  # Instant re-hardening
+MANUAL_RECOVERY.md                       # Complete manual undo guide (no scripts needed)
 ```
 
 ---
@@ -81,7 +85,7 @@ Lock screen ──→ Power icon → hold SHIFT → Restart = Safe Mode (no pass
 |-------------|-------------|--------|
 | **Defender UI bypass** | Real-time Protection toggle accessible in Windows Security | Tamper Protection enabled + Group Policy Firewall lock applied — toggle is now greyed out |
 | **Firewall UI bypass** | Firewall toggle still clickable by employees | GP registry paths for all 3 profiles now grey out the toggle |
-| **Username showing** | `dontdisplaylastusername=0` (shows username on lockscreen) | Fixed to `1` (hidden) — employees type password only |
+| **Username display** | `dontdisplaylastusername` inconsistently set | Now consistently set to `0` (show username) — employees can see their own login name on the lock screen (by design) |
 | **Confirmation bug** | `!confirm!` never evaluated (delayed expansion missing) | All confirm prompts now require typing `CONFIRM` |
 | **Office HKCU-only** | Employees could override macro settings in their own profile | Added HKLM Group Policy paths — user cannot override |
 | **5 ASR rules** | Only basic ASR coverage | Extended to 10 rules covering email, USB, API, JS/VBScript attacks |
@@ -89,6 +93,16 @@ Lock screen ──→ Power icon → hold SHIFT → Restart = Safe Mode (no pass
 | **USB monitor killable** | Ran as foreground PS process — any user could close it | Now registered as SYSTEM Scheduled Task — survives reboots, unkillable |
 | **No audit log** | No record of when scripts ran | Every script logs to `C:\ProgramData\OrgSecurity\security_log.txt` |
 | **No status check** | No way to verify what's actually active | New `check_security_status` shows ✅/❌ for every setting |
+
+## What's New in v2.1
+
+| Addition | Description |
+|----------|-------------|
+| **`turn on security.bat`** | Friendly one-click alias for `apply_all_security` — enables all 5 core security modules |
+| **`turn off security.bat`** | Friendly one-click alias for `remove_all_security` — disables all core security (CONFIRM required) |
+| **`ironclad security.bat`** | Maximum lockdown in 3 phases: core security → supplementary (privacy, update, lockscreen, autoplay) → USB monitor |
+| **`disable security.bat`** | Full security wipe in 3 phases: removes core + others + stops USB monitor task (DISABLE required) |
+| **Auto-exit** | All `.bat` and `.ps1` scripts now exit automatically — no `pause` or `Read-Host` prompt at the end |
 
 ---
 
@@ -107,9 +121,20 @@ Both `cmd/` and `powershell/` directories contain **identical functionality**. C
 
 ## Core Script Reference Table
 
+### Entry-Point Scripts (v2.1)
+
 | Script Name | What It Does | Risk Level |
 |-------------|-------------|------------|
-| `enable_login_security` | CAD required, username **hidden** on lockscreen | Low |
+| `turn on security` | Enables all 5 core security modules | Low |
+| `turn off security` | Disables all 5 core modules (requires `CONFIRM`) | High |
+| `ironclad security` | Full 3-phase lockdown: core + others + USB monitor | Low |
+| `disable security` | Full 3-phase security wipe: core + others + USB monitor (requires `DISABLE`) | Critical |
+
+### Core Scripts
+
+| Script Name | What It Does | Risk Level |
+|-------------|-------------|------------|
+| `enable_login_security` | CAD required, username **shown** on lockscreen (by design) | Low |
 | `disable_login_security` | No CAD, username shown | Low |
 | `enable_network_security` | Firewall (GP locked), SMBv1 off, ports blocked | Low |
 | `disable_network_security` | Restores default network settings, removes GP locks | Medium |
@@ -371,4 +396,6 @@ powershell -Command "Set-ExecutionPolicy Unrestricted -Force"
 
 ---
 
-> **⚠️ KNOWN v1 → v2 UPGRADE NOTE:** If you applied v1 scripts previously, you **must run `apply_all_security` again** with the v2 scripts to fix the username display bug and apply the new Tamper Protection + Firewall GP locks. A reboot is required after.
+> **⚠️ KNOWN v1 → v2 UPGRADE NOTE:** If you applied v1 scripts previously, you **must run `apply_all_security` again** with the v2 scripts to apply the new Tamper Protection + Firewall GP locks. A reboot is required after.
+
+> **⚠️ v2 → v2.1 UPGRADE NOTE:** No re-application needed. The 4 new entry-point scripts (`turn on security`, `turn off security`, `ironclad security`, `disable security`) are additive and do not change existing behaviour. The auto-exit change (removal of `pause`/`Read-Host`) is cosmetic only.

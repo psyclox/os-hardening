@@ -29,4 +29,4 @@ Write-Host "[OK] Standard users cannot kill it via Task Manager"              -F
 Write-Host "[OK] USB insertion events logged to: C:\ProgramData\OrgSecurity\usb_events.txt" -ForegroundColor Green
 Write-Host ""
 Write-Host "To stop/remove: Unregister-ScheduledTask -TaskName '$TaskName' -Confirm:`$false" -ForegroundColor Yellow
-Read-Host "Press Enter to continue"
+

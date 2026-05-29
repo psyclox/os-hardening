@@ -65,6 +65,5 @@ echo [OK] Firewall toggle is now greyed out in Windows Security UI
 echo [OK] Log written to: %LOG_FILE%
 echo.
 echo [WARN] Reboot recommended for all settings to take full effect.
-pause
 endlocal
 exit /b 0

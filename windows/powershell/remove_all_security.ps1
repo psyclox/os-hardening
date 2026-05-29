@@ -38,4 +38,4 @@ Write-Host "   Log: C:\ProgramData\OrgSecurity\security_log.txt" -ForegroundColo
 Write-Host "==============================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "[WARN] System is now unprotected. Run apply_all_security.ps1 to re-harden." -ForegroundColor Yellow
-Read-Host "Press Enter to continue"
+

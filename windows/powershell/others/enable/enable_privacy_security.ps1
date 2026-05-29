@@ -14,4 +14,4 @@ New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo"
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" -Name "Enabled" -Value 0 -Type DWord -Force
 
 Write-Host "[OK] Privacy Security Enabled" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

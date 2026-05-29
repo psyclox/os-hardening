@@ -23,4 +23,4 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "dontd
 Write-Host ""
 Write-Host "[OK] Login Security Disabled (CAD requirement removed)" -ForegroundColor Green
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

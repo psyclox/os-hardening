@@ -55,4 +55,4 @@ Write-Host "[OK] Firewall toggle is now greyed out in Windows Security UI" -Fore
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
 Write-Host ""
 Write-Host "[WARN] Reboot recommended for all settings to take full effect." -ForegroundColor Yellow
-Read-Host "Press Enter to continue"
+

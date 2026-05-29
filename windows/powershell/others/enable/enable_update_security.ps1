@@ -7,4 +7,4 @@ New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Name "DODownloadMode" -Value 0 -Type DWord -Force
 
 Write-Host "[OK] Update Security Enabled (P2P Updates Disabled)" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

@@ -16,4 +16,4 @@ if ($confirm -ne "Y") { exit }
 Write-Host "==============================================" -ForegroundColor Green
 Write-Host "   All Others Security Measures Removed" -ForegroundColor Green
 Write-Host "==============================================" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

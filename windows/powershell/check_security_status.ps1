@@ -153,4 +153,4 @@ Write-Host " [!!]  = PROBLEM - setting is missing or wrong" -ForegroundColor Red
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 
-Read-Host "Press Enter to exit"
+

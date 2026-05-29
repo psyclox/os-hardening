@@ -36,6 +36,5 @@ echo [OK] LSA RunAsPPL enabled - Mimikatz-style credential dumping blocked
 echo [OK] Log written to: %LOG_FILE%
 echo.
 echo [WARN] Reboot required for LSA Protected Process Light to take effect.
-pause
 endlocal
 exit /b 0

@@ -49,6 +49,5 @@ echo.
 echo [OK] Network Security Disabled (Default Settings Restored)
 echo [OK] Firewall GP locks removed - UI controls restored
 echo [OK] Log written to: %LOG_FILE%
-pause
 endlocal
 exit /b 0

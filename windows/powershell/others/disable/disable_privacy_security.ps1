@@ -9,4 +9,4 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Advertis
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" -Name "Enabled" -Value 1 -Type DWord -Force
 
 Write-Host "[OK] Privacy Security Disabled" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

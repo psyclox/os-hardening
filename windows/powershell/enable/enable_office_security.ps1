@@ -56,4 +56,4 @@ Write-Host "[OK] Office Security Enabled (Macros and ActiveX disabled)" -Foregro
 Write-Host "[OK] HKLM Group Policy locks prevent employee overrides" -ForegroundColor Green
 Write-Host "[OK] Covers Office 2013 (15.0) and 2016/2019/365 (16.0)" -ForegroundColor Green
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

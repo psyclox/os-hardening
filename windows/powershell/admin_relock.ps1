@@ -25,4 +25,4 @@ Write-Host " [OK] System is fully re-hardened"                            -Foreg
 Write-Host " [OK] Relock event logged"                                    -ForegroundColor Green
 Write-Host " [WARN] Reboot recommended for all changes to fully activate" -ForegroundColor Yellow
 Write-Host "============================================================" -ForegroundColor Green
-Read-Host "Press Enter to exit"
+

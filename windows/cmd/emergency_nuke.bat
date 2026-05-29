@@ -100,6 +100,5 @@ echo ============================================================
 echo.
 set /p reboot="Reboot now? (Y/N): "
 if /i "!reboot!"=="Y" shutdown /r /t 5 /c "Emergency nuke reboot - hardening removed"
-pause
 endlocal
 exit /b 0

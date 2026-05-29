@@ -63,4 +63,4 @@ Write-Host ""
 Write-Host "[OK] Office Security Disabled - Macros and ActiveX enabled" -ForegroundColor Red
 Write-Host "[WARN] System is now vulnerable to macro-based malware!" -ForegroundColor Red
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

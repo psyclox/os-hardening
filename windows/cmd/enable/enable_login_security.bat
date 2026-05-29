@@ -37,6 +37,5 @@ echo [OK] Login Security Enabled
 echo [OK] Ctrl+Alt+Delete required at login
 echo [OK] Username is shown on lock screen (by design)
 echo [OK] Log written to: %LOG_FILE%
-pause
 endlocal
 exit /b 0

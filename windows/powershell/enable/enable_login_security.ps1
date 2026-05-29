@@ -31,4 +31,4 @@ Write-Host "[OK] Login Security Enabled" -ForegroundColor Green
 Write-Host "[OK] Ctrl+Alt+Delete required at login" -ForegroundColor Green
 Write-Host "[OK] Username is shown on lock screen (by design)" -ForegroundColor Green
 Write-Host "[OK] Log written to: $LogFile" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+

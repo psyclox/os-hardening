@@ -37,6 +37,5 @@ echo  [OK] System is fully re-hardened
 echo  [OK] Relock event logged
 echo  [WARN] Reboot recommended for all changes to fully activate
 echo ============================================================
-pause
 endlocal
 exit /b 0

@@ -41,6 +41,5 @@ echo [OK] USB insertion events logged to: C:\ProgramData\OrgSecurity\usb_events.
 echo.
 echo To stop/remove: run as admin and execute:
 echo   schtasks /delete /tn "%TASK_NAME%" /f
-pause
 endlocal
 exit /b 0

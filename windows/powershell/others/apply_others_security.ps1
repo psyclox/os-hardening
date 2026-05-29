@@ -13,4 +13,4 @@ Write-Host "==============================================" -ForegroundColor Cya
 Write-Host "==============================================" -ForegroundColor Green
 Write-Host "   All Others Security Measures Applied" -ForegroundColor Green
 Write-Host "==============================================" -ForegroundColor Green
-Read-Host "Press Enter to continue"
+
