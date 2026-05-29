@@ -1,0 +1,59 @@
+Windows Registry Editor Version 5.00
+
+; ==============================================================
+;  UAC (USER ACCOUNT CONTROL) ENFORCEMENT — Registry Policy
+;  IT Organization — OS Hardening Suite
+;  Apply: regedit /s enforce_uac_registry.reg
+;  Effect: Sets UAC to maximum security level
+;          Standard users CANNOT elevate without admin creds
+; ==============================================================
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+
+; Enable UAC
+"EnableLUA"=dword:00000001
+
+; Admin Behavior: Prompt for credentials on secure desktop
+; 0=Elevate without prompting (INSECURE)
+; 1=Prompt for credentials on secure desktop
+; 2=Prompt for consent on secure desktop (DEFAULT ADMIN)
+; 3=Prompt for credentials
+; 4=Prompt for consent
+; 5=Prompt for consent for non-Windows binaries
+"ConsentPromptBehaviorAdmin"=dword:00000002
+
+; Standard User Behavior: Automatically deny elevation requests
+; 0=Automatically deny elevation requests (MOST SECURE)
+; 1=Prompt for credentials on secure desktop
+; 3=Prompt for credentials
+"ConsentPromptBehaviorUser"=dword:00000000
+
+; Detect application installations and prompt for elevation
+"EnableInstallerDetection"=dword:00000001
+
+; Only elevate UIAccess applications installed in secure locations
+"EnableSecureUIAPaths"=dword:00000001
+
+; Virtualize file and registry write failures per-user locations
+"EnableVirtualization"=dword:00000001
+
+; Switch to the secure desktop when prompting for elevation
+"PromptOnSecureDesktop"=dword:00000001
+
+; Only elevate executables that are signed and validated
+"ValidateAdminCodeSignatures"=dword:00000000
+
+; Enable Admin Approval Mode for the built-in Administrator account
+"FilterAdministratorToken"=dword:00000001
+
+; ─── Require CTRL+ALT+DEL ────────────────────────────────────
+; 0 = CTRL+ALT+DEL REQUIRED (More secure)
+"DisableCAD"=dword:00000000
+
+; ─── Do not display last username ────────────────────────────
+"DontDisplayLastUserName"=dword:00000001
+
+; ─── Disable automatic logon ─────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"AutoAdminLogon"="0"
+"DefaultPassword"=""

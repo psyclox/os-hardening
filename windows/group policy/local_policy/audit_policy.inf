@@ -1,0 +1,57 @@
+; ==============================================================
+;  AUDIT POLICY - Security Template (INF)
+;  IT Organization — CIS Benchmark Level 2 + NIST 800-53
+;  Applied via: secedit or auditpol
+;  Reference  : CIS Microsoft Windows 10 Benchmark v3.0 — Section 17
+; ==============================================================
+;
+;  Values for Event Auditing:
+;    0 = No Auditing
+;    1 = Success
+;    2 = Failure
+;    3 = Success and Failure
+; ==============================================================
+
+[Unicode]
+Unicode=yes
+
+[Event Audit]
+
+; ─── Account Logon ───────────────────────────────────────────
+; Audit credential validation (3 = Success+Failure)
+AuditAccountLogon           = 3
+
+; ─── Account Management ──────────────────────────────────────
+; Audit all account changes (create, delete, modify)
+AuditAccountManage          = 3
+
+; ─── Logon Events ────────────────────────────────────────────
+; Audit all logon and logoff events
+AuditLogonEvents            = 3
+
+; ─── Object Access ───────────────────────────────────────────
+; Audit access to files, folders, registry (failure mandatory)
+AuditObjectAccess           = 3
+
+; ─── Policy Change ───────────────────────────────────────────
+; Audit all policy modifications
+AuditPolicyChange           = 3
+
+; ─── Privilege Use ───────────────────────────────────────────
+; Audit use of sensitive privileges (e.g., backup, restore)
+AuditPrivilegeUse           = 2
+
+; ─── Process Tracking ────────────────────────────────────────
+; Audit process creation and termination
+AuditProcessTracking        = 1
+
+; ─── System Events ───────────────────────────────────────────
+; Audit system startup, shutdown, security state changes
+AuditSystemEvents           = 3
+
+; ─── Directory Service Access (Domain only) ──────────────────
+AuditDSAccess               = 3
+
+[Version]
+signature="$CHICAGO$"
+Revision=1

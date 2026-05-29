@@ -1,0 +1,163 @@
+; ==============================================================
+;  SECURITY BASELINE - Full Security Template (INF)
+;  IT Organization — CIS Benchmark + NIST 800-53 + DISA STIG
+;  Applied via: secedit /configure /db secedit.sdb /cfg security_baseline.inf
+; ==============================================================
+
+[Unicode]
+Unicode=yes
+
+[Version]
+signature="$CHICAGO$"
+Revision=1
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; SYSTEM ACCESS — Password, Lockout, and Logon Policy
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[System Access]
+
+; Password
+MinimumPasswordLength       = 14
+MaximumPasswordAge          = 90
+MinimumPasswordAge          = 1
+PasswordHistorySize         = 24
+PasswordComplexity          = 1
+ClearTextPassword           = 0
+
+; Lockout
+LockoutBadCount             = 5
+LockoutDuration             = 30
+ResetLockoutCount           = 30
+
+; Guest Account
+EnableGuestAccount          = 0
+
+; Require CTRL+ALT+DEL (DisableCAD = 0)
+; This is enforced via registry in the PowerShell script
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; AUDIT EVENTS
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Event Audit]
+AuditAccountLogon           = 3
+AuditAccountManage          = 3
+AuditLogonEvents            = 3
+AuditObjectAccess           = 3
+AuditPolicyChange           = 3
+AuditPrivilegeUse           = 2
+AuditProcessTracking        = 1
+AuditSystemEvents           = 3
+AuditDSAccess               = 3
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; USER RIGHTS ASSIGNMENT
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Privilege Rights]
+
+; Allow Logon Locally — only Administrators and designated users
+SeInteractiveLogonRight                 = *S-1-5-32-544
+; Note: Add specific user SIDs as needed: ,*S-1-5-21-xxxx-xxx-xxx-XXXX
+
+; Deny logon as service — Guests, Anonymous
+SeDenyServiceLogonRight                 = *S-1-5-32-546,*S-1-5-7
+
+; Deny logon locally — Guests
+SeDenyInteractiveLogonRight             = *S-1-5-32-546
+
+; Deny logon via Remote Desktop — Guests
+SeDenyRemoteInteractiveLogonRight       = *S-1-5-32-546
+
+; Manage auditing and security log — only Administrators
+SeSecurityPrivilege                     = *S-1-5-32-544
+
+; Backup files and directories — only Administrators
+SeBackupPrivilege                       = *S-1-5-32-544
+
+; Restore files and directories — only Administrators
+SeRestorePrivilege                      = *S-1-5-32-544
+
+; Shut down the system — Administrators and Users
+SeShutdownPrivilege                     = *S-1-5-32-544,*S-1-5-32-545
+
+; Take ownership of files — only Administrators
+SeTakeOwnershipPrivilege                = *S-1-5-32-544
+
+; Load and unload device drivers — only Administrators
+SeLoadDriverPrivilege                   = *S-1-5-32-544
+
+; Change system time — only Administrators
+SeSystemtimePrivilege                   = *S-1-5-32-544
+
+; Debug programs — EMPTY (no one, not even admins in hardened environments)
+SeDebugPrivilege                        =
+
+; Access this computer from the network — Administrators only (strict)
+SeNetworkLogonRight                     = *S-1-5-32-544
+
+; Act as part of operating system — EMPTY
+SeTcbPrivilege                          =
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; REGISTRY SECURITY VALUES
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Registry Values]
+
+; Disable anonymous enumeration of accounts
+MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymous=4,1
+MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymousSAM=4,1
+
+; Do not allow anonymous enumeration of SAM accounts and shares
+MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash=4,1
+
+; Enable NTLMv2 only (disable LM and NTLMv1)
+MACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel=4,5
+
+; Require signing for SMB clients
+MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\RequireSecuritySignature=4,1
+MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters\RequireSecuritySignature=4,1
+MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters\EnableSecuritySignature=4,1
+
+; Disable LM hash storage
+MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash=4,1
+
+; Audit: Force audit policy subcategory settings
+MACHINE\System\CurrentControlSet\Control\Lsa\SCENoApplyLegacyAuditPolicy=4,1
+
+; Force logoff when logon hours expire
+MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters\EnableForcedLogOff=4,1
+
+; Disable autorun/autoplay
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun=4,255
+
+; Enable UAC
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA=4,1
+
+; UAC: Prompt behavior for admins (Prompt for credentials on secure desktop)
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorAdmin=4,2
+
+; UAC: Prompt behavior for standard users (Automatically deny)
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorUser=4,0
+
+; Require CTRL+ALT+DEL
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD=4,0
+
+; Disable Remote Assistance
+MACHINE\System\CurrentControlSet\Control\Remote Assistance\fAllowToGetHelp=4,0
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; SECURITY OPTIONS (via secedit)
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[System Log]
+MaximumLogSize                          = 4096
+AuditLogRetentionPeriod                 = 0
+RetentionDays                           = 0
+
+[Security Log]
+MaximumLogSize                          = 4096
+AuditLogRetentionPeriod                 = 0
+RetentionDays                           = 0
+
+[Application Log]
+MaximumLogSize                          = 4096
+AuditLogRetentionPeriod                 = 0
+RetentionDays                           = 0

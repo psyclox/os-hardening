@@ -1,0 +1,37 @@
+; ==============================================================
+;  CUSTOM ADMX TEMPLATE — Security Baseline
+;  IT Organization
+;  Place this file and Security_Baseline.adml in:
+;    C:\Windows\PolicyDefinitions\
+;    %SYSVOL%\domain\Policies\PolicyDefinitions\
+; ==============================================================
+
+; This is a placeholder. Replace with your organization's actual
+; ADMX template XML content below.
+;
+; For production use, download the official Microsoft ADMX templates:
+;   https://www.microsoft.com/en-us/download/details.aspx?id=104677
+;
+; And CIS ADMX templates from:
+;   https://www.cisecurity.org/cis-benchmarks/
+;
+; Place .admx files in: C:\Windows\PolicyDefinitions\
+; Place .adml files in: C:\Windows\PolicyDefinitions\en-US\
+
+; ─── ADMX Deployment Instructions ────────────────────────────
+;
+; 1. Download Windows Administrative Templates:
+;    winget install Microsoft.ADMXForWindowsClient
+;
+;    OR download from Microsoft Download Center and run the MSI.
+;
+; 2. Copy ADMX to Policy Definitions:
+;    Copy-Item "C:\Program Files (x86)\Microsoft Group Policy\*" `
+;              "C:\Windows\PolicyDefinitions\" -Recurse -Force
+;
+; 3. For domain environments, also copy to SYSVOL:
+;    Copy-Item "C:\Windows\PolicyDefinitions\*" `
+;              "\\$env:USERDNSDOMAIN\SYSVOL\$env:USERDNSDOMAIN\Policies\PolicyDefinitions\" `
+;              -Recurse -Force
+;
+; 4. Open gpedit.msc or gpmc.msc — new templates will be visible.

@@ -1,0 +1,62 @@
+Windows Registry Editor Version 5.00
+
+; ==============================================================
+;  WINDOWS DEFENDER ENFORCEMENT — Registry Policy
+;  IT Organization — OS Hardening Suite
+;  Apply: regedit /s enforce_defender_registry.reg
+;  Effect: Forces Defender ON, prevents disabling via policy
+;          Enables Cloud Protection, PUA, Real-Time Monitoring
+; ==============================================================
+
+; ─── Core Defender Policy ────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+"DisableAntiSpyware"=dword:00000000
+"DisableAntiVirus"=dword:00000000
+"DisableRoutinelyTakingAction"=dword:00000000
+"ServiceKeepAlive"=dword:00000001
+
+; ─── Real-Time Protection ────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
+"DisableRealtimeMonitoring"=dword:00000000
+"DisableBehaviorMonitoring"=dword:00000000
+"DisableOnAccessProtection"=dword:00000000
+"DisableScanOnRealtimeEnable"=dword:00000000
+"DisableIOAVProtection"=dword:00000000
+
+; ─── Cloud Protection (MAPS) ─────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
+"SpynetReporting"=dword:00000002
+"SubmitSamplesConsent"=dword:00000001
+"DisableBlockAtFirstSeen"=dword:00000000
+
+; ─── PUA (Potentially Unwanted Applications) ─────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
+"MpEnablePus"=dword:00000001
+
+; ─── Tamper Protection ───────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"TamperProtection"=dword:00000005
+
+; ─── Signature Updates ───────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates]
+"ForceUpdateFromMU"=dword:00000001
+"DefinitionUpdateFileSharesSources"=""
+"SignatureUpdateInterval"=dword:00000008
+
+; ─── Scan Settings ───────────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan]
+"DisableArchiveScanning"=dword:00000000
+"DisableEmailScanning"=dword:00000000
+"DisableRemovableDriveScanning"=dword:00000000
+"DisableRestorePoint"=dword:00000000
+"ScanParameters"=dword:00000002
+"ScheduleDay"=dword:00000000
+"ScheduleTime"=dword:00000060
+
+; ─── Windows Defender Service (Ensure it starts) ─────────────
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
+"Start"=dword:00000002
+"DelayedAutostart"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sense]
+"Start"=dword:00000002

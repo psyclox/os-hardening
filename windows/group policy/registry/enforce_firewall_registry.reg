@@ -1,0 +1,46 @@
+Windows Registry Editor Version 5.00
+
+; ==============================================================
+;  FIREWALL ENFORCEMENT — Registry Policy
+;  IT Organization — OS Hardening Suite
+;  Apply: regedit /s enforce_firewall_registry.reg
+;  Effect: Enforces Windows Firewall ON for ALL profiles
+;          and prevents standard users from disabling it
+; ==============================================================
+
+; ─── Domain Profile ──────────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile]
+"EnableFirewall"=dword:00000001
+"DefaultInboundAction"=dword:00000001
+"DefaultOutboundAction"=dword:00000000
+"DisableNotifications"=dword:00000000
+"AllowLocalPolicyMerge"=dword:00000000
+"AllowLocalIPsecPolicyMerge"=dword:00000000
+"DoNotAllowExceptions"=dword:00000000
+
+; ─── Private Profile ─────────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile]
+"EnableFirewall"=dword:00000001
+"DefaultInboundAction"=dword:00000001
+"DefaultOutboundAction"=dword:00000000
+"DisableNotifications"=dword:00000000
+"AllowLocalPolicyMerge"=dword:00000000
+"AllowLocalIPsecPolicyMerge"=dword:00000000
+
+; ─── Public Profile ──────────────────────────────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile]
+"EnableFirewall"=dword:00000001
+"DefaultInboundAction"=dword:00000001
+"DefaultOutboundAction"=dword:00000000
+"DisableNotifications"=dword:00000000
+"AllowLocalPolicyMerge"=dword:00000000
+"AllowLocalIPsecPolicyMerge"=dword:00000000
+
+; ─── Prevent Firewall Service from being stopped ─────────────
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MpsSvc]
+"Start"=dword:00000002
+"DelayedAutostart"=dword:00000000
+
+; ─── Windows Defender Firewall — Legacy Key ──────────────────
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall]
+"PolicyVersion"=dword:00000201
